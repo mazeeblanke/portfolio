@@ -1,0 +1,30 @@
+
+require 'yaml'
+
+configPath = File.expand_path("config.yaml", File.dirname(__FILE__))
+
+Vagrant.configure("2") do |config|
+
+    if File.exists? configPath then
+        settings = YAML.load_file(configPath)
+    else
+        abort "Config file not found in #{configPath}"
+    end    
+
+    config.vm.box = settings['box']
+
+    config.vm.synced_folder ".", "/vagrant"
+
+    config.vm.provision "ansible" do |ansible|
+        # ansible.compatibility_mode = "2.0"
+        ansible.playbook = 'ansible/main.yaml'
+    end  
+
+    config.vm.provider "vagrant" do |vb|
+        vb.cpus = settings['cpus']
+        vb.memory = settings['memory']
+    end  
+
+    config.vm.network "private_network", ip: settings['ip']
+
+end    
