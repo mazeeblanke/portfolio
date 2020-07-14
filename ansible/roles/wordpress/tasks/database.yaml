@@ -1,0 +1,5 @@
+- name: create database
+  mysql_db:
+    name: '{{ wp_config.db_name }}'
+    state: present
+

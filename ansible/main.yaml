@@ -1,0 +1,12 @@
+- name: Playbook to provision server
+  hosts: all
+  gather_facts: true
+  vars_files:
+    - defaults/main.yaml
+  roles:
+    - wordpress
+  tasks:
+    - name: Restart apache2
+      service:
+        name: apache2
+        state: restarted

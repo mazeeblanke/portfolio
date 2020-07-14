@@ -1,0 +1,5 @@
+ip: 192.168.200.200
+hostname: portfolio.dev
+memory: 1024
+cpus: 2
+box: ideasonpurpose/basic-wp

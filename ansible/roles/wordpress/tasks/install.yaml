@@ -1,0 +1,31 @@
+# create tmp directory
+- name: create tmp directory
+  file:
+    path: '/tmp/wordpress'
+    state: directory
+  register: tmp
+
+- name: create wordpress tmp directory
+  file:
+    path: '/tmp/wordpress/wp'
+    state: directory
+  register: wp_tmp
+
+# download wordpress to tmp
+- name: download wordpress
+  get_url:
+    url: '{{ wp_downloads_link }}'
+    dest: '{{ tmp.path }}'
+
+# extract to another tmp location
+- name: extract wordpress zip
+  unarchive:
+    src: '{{ tmp.path }}'
+    dest: '{{ wp_tmp.path }}/'
+    remote_src: yes
+
+# copy to web root
+- name: copy wordpress to web root
+  copy:
+    src: '{{ tmp.path }}/wordpress/'
+    dest: '{{ web_root }}/'

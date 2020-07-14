@@ -1,0 +1,8 @@
+wp_config:
+  db_name: portfolio
+  db_user: root
+  db_pass: 12345678
+
+wp_downloads_link: 'https://wordpress.org/latest.zip'
+
+web_root: '/vagrant/site'

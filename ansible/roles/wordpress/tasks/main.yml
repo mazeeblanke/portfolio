@@ -1,0 +1,7 @@
+# tasks file for wordpress
+# import tasks
+# import install task, handles download and setup up of wordpress
+# import task for database
+
+- import_tasks: install.yaml
+- import_tasks: database.yaml 
